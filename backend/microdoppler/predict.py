@@ -2,8 +2,26 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 
-# Load model only once
-model = tf.keras.models.load_model("microdoppler/microdoppler_fft_cnn.h5")
+# Lazy-load model to avoid import-time crash and provide clearer errors
+model = None
+
+
+def _load_model():
+    global model
+    if model is not None:
+        return model
+    try:
+        model = tf.keras.models.load_model("microdoppler/microdoppler_fft_cnn.h5")
+        return model
+    except TypeError as e:
+        raise RuntimeError(
+            "Failed to deserialize the Keras model. This is commonly caused by a TensorFlow/Keras version mismatch (model saved with a different Keras version).\n"
+            "Possible fixes:\n"
+            " - Uninstall the standalone `keras` package if installed: `pip uninstall -y keras`\n"
+            " - Install a TensorFlow version compatible with the model (example): `pip install 'tensorflow==2.11.0'`\n"
+            " - Re-save the model using the current environment's TensorFlow/Keras, then retry.\n"
+            "Original error: %s" % e
+        ) from e
 
 WINDOW_SIZE = 128
 STRIDE = 64
@@ -41,7 +59,10 @@ def predict(csv_file):
 
     X = preprocess(csv_file)
 
-    prediction = model.predict(X, verbose=0)
+    # Ensure model is loaded (and raise a clear error if it fails)
+    m = _load_model()
+
+    prediction = m.predict(X, verbose=0)
 
     predictions = (prediction > 0.5).astype(int).flatten()
 
