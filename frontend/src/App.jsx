@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import heroImage from "./assets/drone-hero.png";
+// Assuming you placed your new hero image in the public folder or imported it
+import heroImage from "./assets/drone-hero.png"; 
 
 function App() {
   const [radarFile, setRadarFile] = useState(null);
@@ -28,7 +29,6 @@ function App() {
       const response = await axios.post("http://127.0.0.1:8000/analyze-radar", formData);
       setPrediction(response.data.prediction);
       setConfidence(response.data.confidence);
-      // reset downstream results
       setDetected(false);
       setDetectedImage("");
       setCropImage("");
@@ -53,18 +53,8 @@ function App() {
       }
       setDetected(true);
       setDetectorConfidence(response.data.confidence);
-      setDetectedImage(
-        "http://127.0.0.1:8000/" +
-        response.data.detected_image +
-        "?t=" +
-        Date.now()
-      );
-      setCropImage(
-        "http://127.0.0.1:8000/" +
-        response.data.crop_image +
-        "?t=" +
-        Date.now()
-      );
+      setDetectedImage("http://127.0.0.1:8000/" + response.data.detected_image);
+      setCropImage("http://127.0.0.1:8000/" + response.data.crop_image);
     } catch (error) {
       console.error(error);
       alert("Detection Failed");
@@ -152,7 +142,7 @@ function App() {
       <hr />
 
       <div className="section">
-        <h2>Phase 1 : Radar Array Array Input</h2>
+        <h2>Phase 1: Radar Array Input</h2>
         <input
           type="file"
           accept=".csv"
@@ -164,14 +154,14 @@ function App() {
         {prediction && (
           <div style={{ marginTop: "20px" }}>
             <h3>Prediction: <span style={{color: "#fff"}}>{prediction}</span></h3>
-            <h3>Confidence: <span style={{color: "#00e5ff"}}>{(confidence * 100).toFixed(2)}%</span></h3>
+            <h3>Confidence: <span style={{color: "var(--neon-green)"}}>{(confidence * 100).toFixed(2)}%</span></h3>
           </div>
         )}
       </div>
 
       {prediction === "Drone" && (
-        <div className="section">
-          <h2>Phase 2 : Optical Targeting System</h2>
+        <div className="section" style={{ marginTop: "30px" }}>
+          <h2>Phase 2: Optical Targeting System</h2>
           <input
             type="file"
             accept="image/*"
@@ -189,10 +179,10 @@ function App() {
               <button onClick={classifyDrone}>Execute Target Classification</button>
               
               {droneType && (
-                <div className="result-card" style={{ marginTop: "20px", border: "1px solid #cda2ff" }}>
+                <div className="result-card" style={{ marginTop: "20px", border: "1px solid var(--neon-green)" }}>
                   <h3>Drone Classification Verified</h3>
                   <p>Type: <span style={{color: "#fff"}}>{droneType}</span></p>
-                  <p>Match Confidence: <span style={{color: "#00e5ff"}}>{(classConfidence * 100).toFixed(2)}%</span></p>
+                  <p>Match Confidence: <span style={{color: "var(--neon-green)"}}>{(classConfidence * 100).toFixed(2)}%</span></p>
                 </div>
               )}
             </div>
@@ -208,7 +198,7 @@ function App() {
         <p>Drone Type: <span style={{color: "#fff"}}>{droneType || "N/A"}</span></p>
       </div>
 
-      <h2>Surveillance History Database</h2>
+      <h2 style={{ marginTop: "40px" }}>Surveillance History Database</h2>
       <table className="history-table">
         <thead>
           <tr>
