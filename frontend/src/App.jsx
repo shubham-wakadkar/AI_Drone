@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
+import heroImage from "./assets/hero.png";
 
 function App() {
   const [radarFile, setRadarFile] = useState(null);
@@ -111,7 +112,7 @@ function App() {
     <div className="app-container">
       
       <div className="header-container">
-        <img src="hero.png" alt="Drone Hero" className="hero-image" />
+        <img src={heroImage} alt="Drone Hero" className="hero-image" />
         <h1 className="title">AI Drone Surveillance System</h1>
         <div className="subtitle">MODERN DEFENSE RELIES ON LAYERED, INTELLIGENT INFRASTRUCTURE</div>
       </div>

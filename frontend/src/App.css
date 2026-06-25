@@ -9,7 +9,7 @@ body {
     linear-gradient(rgba(125, 76, 219, 0.15) 1px, transparent 1px),
     linear-gradient(90deg, rgba(125, 76, 219, 0.15) 1px, transparent 1px);
   background-size: 40px 40px;
-  color: #e0d4f5;
+  color: #be5615;
   overflow-x: hidden;
 }
 
@@ -26,8 +26,11 @@ body {
 }
 
 .hero-image {
-  max-width: 300px;
-  filter: drop-shadow(0 0 20px rgba(125, 76, 219, 0.8));
+  max-width: 80px;
+  height: 80px;
+  object-fit: contain;
+  opacity: 0.2;
+  filter: drop-shadow(0 0 20px rgba(125, 76, 219, 0.8)) brightness(1.1) contrast(1.2);
   margin-bottom: 20px;
   animation: float 4s ease-in-out infinite;
 }
