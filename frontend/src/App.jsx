@@ -53,8 +53,8 @@ function App() {
       }
       setDetected(true);
       setDetectorConfidence(response.data.confidence);
-      setDetectedImage("http://127.0.0.1:8000/" + response.data.detected_image);
-      setCropImage("http://127.0.0.1:8000/" + response.data.crop_image);
+      setDetectedImage("http://127.0.0.1:8000/" + response.data.detected_image + "?t=" + Date.now());
+      setCropImage(  "http://127.0.0.1:8000/" + response.data.crop_image + "?t=" + Date.now());
     } catch (error) {
       console.error(error);
       alert("Detection Failed");
