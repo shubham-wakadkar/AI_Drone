@@ -29,7 +29,7 @@ body {
   max-width: 80px;
   height: 80px;
   object-fit: contain;
-  opacity: 0.2;
+  opacity: 0.5;
   filter: drop-shadow(0 0 20px rgba(125, 76, 219, 0.8)) brightness(1.1) contrast(1.2);
   margin-bottom: 20px;
   animation: float 4s ease-in-out infinite;

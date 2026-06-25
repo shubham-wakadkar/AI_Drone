@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
-import heroImage from "./assets/hero.png";
+import heroImage from "./assets/drone-hero.png";
 
 function App() {
   const [radarFile, setRadarFile] = useState(null);
