@@ -1,0 +1,9 @@
+pip install fastapi
+pip install uvicorn
+pip install tensorflow
+pip install pandas
+pip install numpy
+pip install ultralytics
+pip install pillow
+pip install python-multipart
+pip install aiofiles
