@@ -1,6 +1,9 @@
 from ultralytics import YOLO
 from PIL import Image
 import os
+import uuid
+
+uid = str(uuid.uuid4())[:8]
 
 # Load detector model
 model = YOLO("detector/best.pt")
@@ -34,13 +37,13 @@ def detect(image_path):
 
     os.makedirs("outputs", exist_ok=True)
 
-    crop_path = "outputs/crop.jpg"
+    crop_path = f"outputs/crop_{uid}.jpg"
 
     crop.save(crop_path)
 
     plotted = result.plot()
 
-    detected_path = "outputs/detected.jpg"
+    detected_path = f"outputs/detected_{uid}.jpg"
 
     Image.fromarray(plotted).save(detected_path)
 
