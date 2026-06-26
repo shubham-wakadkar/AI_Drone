@@ -29,6 +29,28 @@ function App() {
       const response = await axios.post("http://127.0.0.1:8000/analyze-radar", formData);
       setPrediction(response.data.prediction);
       setConfidence(response.data.confidence);
+      if (response.data.prediction === "Bird") {
+
+        await axios.post(
+          "http://127.0.0.1:8000/save-analysis",
+          {
+      
+            radar_prediction: "Bird",
+      
+            radar_confidence: response.data.confidence,
+      
+            detection_confidence: null,
+      
+            drone_type: "NULL",
+      
+            classification_confidence: null
+      
+          }
+        );
+      
+        loadHistory();
+      
+      }
       setDetected(false);
       setDetectedImage("");
       setCropImage("");
@@ -98,6 +120,31 @@ function App() {
       console.error(error);
     }
   };
+
+  const resetAnalysis = () => {
+
+    setRadarFile(null);
+  
+    setPrediction("");
+  
+    setConfidence("");
+  
+    setImageFile(null);
+  
+    setDetected(false);
+  
+    setDetectorConfidence("");
+  
+    setDetectedImage("");
+  
+    setCropImage("");
+  
+    setDroneType("");
+  
+    setClassConfidence("");
+  
+  };
+
   
   useEffect(() => {
     loadHistory();
@@ -138,6 +185,10 @@ function App() {
           <h2>{latestDrone}</h2>
         </div>
       </div>
+
+      <button onClick={resetAnalysis}>
+       New Analysis
+      </button>
 
       <hr />
 
