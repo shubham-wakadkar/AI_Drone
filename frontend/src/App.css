@@ -24,13 +24,10 @@ body {
   perspective: 1200px; /* Establishes the 3D space */
 }
 
-.app-container {
-  padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  /* Subtle isometric tilt */
-  transform: rotateX(5deg) rotateY(-5deg);
-  transform-style: preserve-3d;
+.app-container{
+    padding:40px;
+    max-width:1200px;
+    margin:0 auto;
 }
 
 .header-container {
